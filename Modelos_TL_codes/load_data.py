@@ -3,9 +3,8 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 import os
 
 
-def load_data(base_dir, IMG_SIZE, strategy):
-    BATCH_SIZE_PER_REPLICA = 16
-    BATCH_SIZE = BATCH_SIZE_PER_REPLICA * strategy.num_replicas_in_sync
+def load_data(base_dir, IMG_SIZE):
+    BATCH_SIZE = 16
     train_dir = os.path.join(base_dir, 'train')
     test_dir = os.path.join(base_dir, 'test')
     val_dir = os.path.join(base_dir, 'val')
