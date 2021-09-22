@@ -4,8 +4,8 @@ from tensorflow.keras.optimizers import Adam
 from Modelos_TL.load_data import load_data
 
 
-def train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, strategy):
-    train_dataset, test_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE, strategy)
+def train(modelo, base_dir, epoch, cp_callback, IMG_SIZE):
+    train_dataset, test_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE)
     print('start training')
     start_time = time.time()
     # Training the model
@@ -22,8 +22,8 @@ def train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, strategy):
     return history
 
 
-def fine_tunning(modelo, base_dir, total_epoch, history, cp_callback, IMG_SIZE, strategy):
-    train_dataset, test_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE, strategy)
+def fine_tunning(modelo, base_dir, total_epoch, history, cp_callback, IMG_SIZE):
+    train_dataset, test_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE)
     
     start_time = time.time()
     # Training the model
