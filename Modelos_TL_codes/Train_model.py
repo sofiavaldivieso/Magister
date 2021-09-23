@@ -1,7 +1,7 @@
 import time
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
-from Modelos_TL.load_data import load_data
+from Modelos_TL_codes.load_data import load_data
 
 
 def train(modelo, base_dir, epoch, cp_callback, IMG_SIZE):
