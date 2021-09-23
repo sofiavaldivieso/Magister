@@ -19,14 +19,9 @@ def load_data(base_dir, IMG_SIZE):
                                                       batch_size=BATCH_SIZE,
                                                       image_size=IMG_SIZE)
 
-    #test_dataset = image_dataset_from_directory(test_dir,
-                                                #batch_size=BATCH_SIZE,
-                                                #image_size=IMG_SIZE)
-    
-    train_batches = tf.data.experimental.cardinality(train_dataset)
-    test_dataset = train_dataset.take(train_batches // 10)
-    train_dataset = train_dataset.skip(train_batches // 10)
-    
+    test_dataset = image_dataset_from_directory(test_dir,
+                                                batch_size=128,
+                                                image_size=IMG_SIZE)    
     AUTOTUNE = tf.data.experimental.AUTOTUNE
 
     train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
