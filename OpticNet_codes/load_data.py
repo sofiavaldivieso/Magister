@@ -4,9 +4,8 @@ import os
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 
-def load_data(base_dir, strategy):
-    BATCH_SIZE_PER_REPLICA = 16
-    batch_size = BATCH_SIZE_PER_REPLICA * strategy.num_replicas_in_sync
+def load_data(base_dir):
+    batch_size = 16
     train_dir = os.path.join(base_dir, 'train')
     test_dir = os.path.join(base_dir, 'test')
     val_dir = os.path.join(base_dir, 'val')
@@ -20,7 +19,7 @@ def load_data(base_dir, strategy):
                                fill_mode='nearest', 
                                validation_split=0.04)
     test_datagen = ImageDataGenerator(rescale=1.0 / 255)
-    classes = ['NORMAL', 'AR']
+    classes = ['NORMAL', 'ARE']
     train_batches = train_datagen.flow_from_directory(train_dir,
                                               target_size=(160, 160),
                                               classes=classes,
