@@ -25,6 +25,12 @@ def modelo(IMG_SIZE, model_name, metrics):
                                                        weights='imagenet',
                                                        input_tensor=None,
                                                        input_shape=IMG_SHAPE)
+    elif model_name == 'Inception':
+        preprocess_input = tf.keras.applications.inception_v3.preprocess_input
+        base_model = tf.keras.applications.InceptionV3(include_top=False,
+                                                       weights='imagenet',
+                                                       input_tensor=None,
+                                                       input_shape=IMG_SHAPE)                                                  
     global_avg_pooling=tf.keras.layers.GlobalAveragePooling2D()
     inputs = tf.keras.Input(shape=IMG_SHAPE)
     x = data_augmentation(inputs)
