@@ -107,7 +107,7 @@ def RDBI(X, filters, base, number):
     return X
 
 
-def OpticNet(input_size, num_of_classes, strategy):
+def OpticNet(input_size, num_of_classes):
     input_shape = (input_size, input_size, 3)  # Height x Width x Channel
     X_input = Input(input_shape)
     X = Conv2D(64, (7, 7), strides=(2, 2), padding='same', name='CONV1', kernel_initializer=glorot_uniform(seed=0))(
