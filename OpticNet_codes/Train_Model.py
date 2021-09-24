@@ -4,8 +4,8 @@ import time
 from tensorflow.keras.optimizers import Adam
 
 
-def train(model, base_dir, epoch, cb, strategy):
-    train_batches, test_batches, val_batches, classes = load_data(base_dir, strategy)
+def train(model, base_dir, epoch, cb):
+    train_batches, test_batches, val_batches, classes = load_data(base_dir)
     start_time = time.time()
     # Training the model
     batch_size=16
