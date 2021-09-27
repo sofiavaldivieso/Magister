@@ -35,7 +35,7 @@ def load_data_train(base_dir, IMG_SIZE):
     test_dataset = test_dataset.prefetch(buffer_size=AUTOTUNE)
     return train_dataset, test_dataset, class_names
 
-def plot_roc(name, labels, predictions, plots_path, i, **kwargs):
+def plot_roc(name, labels, predictions, **kwargs):
     fp, tp, _ = sklearn.metrics.roc_curve(labels, predictions)
 
     plt.plot(100 * fp, 100 * tp, label=name, linewidth=2, **kwargs)
@@ -44,7 +44,7 @@ def plot_roc(name, labels, predictions, plots_path, i, **kwargs):
     plt.xlim([-0.5, 20])
     plt.ylim([80, 100.5])
     plt.grid(True)
-    plt.savefig(f'{plot_path}/roc'+str(i)+'.png')
+    
 
 
 
@@ -65,7 +65,7 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
     print('Total: ', np.sum(cm[1]))
 
 
-def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
+def plot_metrics(history, fine_tunning=False, history_fine=None):
     plt.figure(figsize=(8, 8))
     metrics = ['loss', 'prc', 'precision', 'recall']
     if fine_tunning:
@@ -86,7 +86,7 @@ def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
                 plt.ylim([0, 1])
 
             plt.legend()
-            plt.savefig(f'{plot_path}/metrics'+str(i)+'.png')
+            
     else:
         for n, metric in enumerate(metrics):
             name = metric.replace("_", " ").capitalize()
@@ -104,18 +104,16 @@ def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
                 plt.ylim([0, 1])
 
             plt.legend()
-            plt.savefig(f'{plot_path}/metrics'+str(i)+'.png')
             
 
 
-def plot_prc(name, labels, predictions, plots_path, i, **kwargs):
+def plot_prc(name, labels, predictions, **kwargs):
     precision, recall, _ = sklearn.metrics.precision_recall_curve(labels, predictions)
     plt.plot(precision, recall, label=name, linewidth=2, **kwargs)
     plt.xlabel('Recall')
     plt.ylabel('Precision')
     plt.grid(True)
-    plt.savefig(f'{plot_path}/prc'+str(i)+'.png')
-
+    
 
 
 def visualize(history, baseline_results, model, base_dir, IMG_SIZE, BATCH_SIZE,
