@@ -1,7 +1,7 @@
 import tensorflow as tf
 import keras
 from keras import callbacks
-from Modelos_TL.load_data import load_data
+from Modelos_TL_codes.load_data import load_data
 
 
 import matplotlib as mpl
