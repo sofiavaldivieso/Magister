@@ -30,7 +30,7 @@ def plot_roc(name, labels, predictions, **kwargs):
 
 def plot_cm(labels, predictions, plots_path, i, p=0.5):
     cm = confusion_matrix(labels, predictions > p)
-    fig = plt.figure(figsize=(5, 5))
+    fig = plt.figure(figsize=(10, 10))
     sns.heatmap(cm, annot=True, fmt="d")
     plt.title('Confusion matrix @{:.2f}'.format(p))
     plt.ylabel('Actual label')
@@ -46,7 +46,7 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
 
 
 def plot_metrics(history, fine_tunning=False, history_fine=None):
-    plt.figure(figsize=(8, 8))
+    plt.figure(figsize=(10, 10))
     metrics = ['loss', 'prc', 'precision', 'recall']
     if fine_tunning:
         for n, metric in enumerate(metrics):
@@ -98,7 +98,7 @@ def plot_prc(name, labels, predictions, **kwargs):
 
 def visualize(history, baseline_results, model, base_dir, IMG_SIZE, BATCH_SIZE,
               fine_tunning=False, history_fine=None):
-    mpl.rcParams['figure.figsize'] = (12, 10)
+    mpl.rcParams['figure.figsize'] = (24, 20)
     colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
     metrics = ['loss', 'prc', 'precision', 'recall']
     train_dataset, test_dataset, class_names = load_data_train(base_dir, IMG_SIZE)
