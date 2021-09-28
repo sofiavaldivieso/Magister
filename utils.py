@@ -18,11 +18,10 @@ import os
 def plot_roc(name, labels, predictions, **kwargs):
     fp, tp, _ = sklearn.metrics.roc_curve(labels, predictions)
 
-    plt.plot(100 * fp, 100 * tp, label=name, linewidth=2, **kwargs)
-    plt.xlabel('False positives [%]')
-    plt.ylabel('True positives [%]')
-    plt.xlim([-0.5, 20])
-    plt.ylim([80, 100.5])
+    plt.plot(fp, tp, label=name, linewidth=2, **kwargs)
+    plt.xlabel('False positives')
+    plt.ylabel('True positives')
+    plt.axis([0,1,0,1]) 
     plt.grid(True)
     
 
@@ -46,7 +45,7 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
 
 
 def plot_metrics(history, fine_tunning=False, history_fine=None):
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(15, 15))
     metrics = ['loss', 'prc', 'precision', 'recall']
     if fine_tunning:
         for n, metric in enumerate(metrics):
@@ -99,7 +98,6 @@ def plot_prc(name, labels, predictions, **kwargs):
 def visualize(history, baseline_results, model, base_dir, IMG_SIZE, BATCH_SIZE,
               fine_tunning=False, history_fine=None):
     mpl.rcParams['figure.figsize'] = (24, 20)
-    colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
     metrics = ['loss', 'prc', 'precision', 'recall']
     train_dataset, test_dataset, class_names = load_data_train(base_dir, IMG_SIZE)
     image_batch_train, train_labels = next(iter(train_dataset))
@@ -112,12 +110,12 @@ def visualize(history, baseline_results, model, base_dir, IMG_SIZE, BATCH_SIZE,
 
     plot_cm(test_labels, test_predictions)
 
-    plot_roc("Train", train_labels, train_predictions, color=colors[0])
-    plot_roc("Test", test_labels, test_predictions, color=colors[0], linestyle='--')
+    plot_roc("Train", train_labels, train_predictions, color='blue')
+    plot_roc("Test", test_labels, test_predictions, color='blue', linestyle='--')
     plt.legend(loc='lower right')
 
-    plot_prc("Train", train_labels, train_predictions, color=colors[0])
-    plot_prc("Test", test_labels, test_predictions, color=colors[0], linestyle='--')
+    plot_prc("Train", train_labels, train_predictions, color='blue')
+    plot_prc("Test", test_labels, test_predictions, color='blue', linestyle='--')
     plt.legend(loc='lower right')
 
     plot_metrics(history, fine_tunning, history_fine)
