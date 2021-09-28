@@ -15,26 +15,6 @@ import numpy as np
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 import os
 
-def load_data_train(base_dir, IMG_SIZE):
-    train_dir = os.path.join(base_dir, 'train')
-    test_dir = os.path.join(base_dir, 'test')
-    val_dir = os.path.join(base_dir, 'val')
-    BATCH_SIZE = 445
-    train_dataset = image_dataset_from_directory(train_dir,
-                                                 batch_size=BATCH_SIZE,
-                                                 image_size=IMG_SIZE)
-    class_names = train_dataset.class_names
-
-    test_dataset = image_dataset_from_directory(test_dir,
-                                                batch_size=BATCH_SIZE,
-                                                image_size=IMG_SIZE)
-
-    AUTOTUNE = tf.data.experimental.AUTOTUNE
-
-    train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
-    test_dataset = test_dataset.prefetch(buffer_size=AUTOTUNE)
-    return train_dataset, test_dataset, class_names
-
 def plot_roc(name, labels, predictions, **kwargs):
     fp, tp, _ = sklearn.metrics.roc_curve(labels, predictions)
 
@@ -74,7 +54,7 @@ def plot_metrics(history, fine_tunning=False, history_fine=None):
             plt.subplot(2, 2, n + 1)
             plt.plot(history.epoch + history_fine.epoch, history.history[metric] + history_fine.history[metric],
                      color='blue', label='Train')
-            plt.plot(history.epoch, history.history['val_' + metric] + history_fine.history['val_' + metric],
+            plt.plot(history.epoch + history_fine.epoch, history.history['val_' + metric] + history_fine.history['val_' + metric],
                      color='blue', linestyle="--", label='Val')
             plt.xlabel('Epoch')
             plt.ylabel(name)
