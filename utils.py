@@ -56,7 +56,7 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
     plt.show()
-    plt.savefig(f'{plot_path}/CM'+str(i)+'.png')
+    plt.savefig(f'{plots_path}/CM'+str(i)+'.png')
 
     print('True Negatives: ', cm[0][0])
     print('False Positives: ', cm[0][1])
