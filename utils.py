@@ -19,7 +19,7 @@ def load_data_train(base_dir, IMG_SIZE):
     train_dir = os.path.join(base_dir, 'train')
     test_dir = os.path.join(base_dir, 'test')
     val_dir = os.path.join(base_dir, 'val')
-    BATCH_SIZE = 128
+    BATCH_SIZE = 445
     train_dataset = image_dataset_from_directory(train_dir,
                                                  batch_size=BATCH_SIZE,
                                                  image_size=IMG_SIZE)
@@ -50,13 +50,13 @@ def plot_roc(name, labels, predictions, **kwargs):
 
 def plot_cm(labels, predictions, plots_path, i, p=0.5):
     cm = confusion_matrix(labels, predictions > p)
-    plt.figure(figsize=(5, 5))
+    fig = plt.figure(figsize=(5, 5))
     sns.heatmap(cm, annot=True, fmt="d")
     plt.title('Confusion matrix @{:.2f}'.format(p))
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
     plt.show()
-    plt.savefig(f'{plots_path}/CM'+str(i)+'.png')
+    fig.savefig(f'{plots_path}/CM'+str(i)+'.png')
 
     print('True Negatives: ', cm[0][0])
     print('False Positives: ', cm[0][1])
