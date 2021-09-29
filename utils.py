@@ -21,7 +21,7 @@ def plot_roc(name, labels, predictions, **kwargs):
     plt.plot(fp, tp, label=name, linewidth=1.5, **kwargs)
     plt.xlabel('False positives')
     plt.ylabel('True positives')
-    plt.axis([0,1,0,1]) 
+    plt.axis([-0.01,1.01,-0.01,1.01]) 
     plt.grid(True)
     
 
