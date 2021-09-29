@@ -18,14 +18,12 @@ import os
 def plot_roc(name, labels, predictions, **kwargs):
     fp, tp, _ = sklearn.metrics.roc_curve(labels, predictions)
 
-    plt.plot(fp, tp, label=name, linewidth=2, **kwargs)
+    plt.plot(fp, tp, label=name, linewidth=1.5, **kwargs)
     plt.xlabel('False positives')
     plt.ylabel('True positives')
     plt.axis([0,1,0,1]) 
     plt.grid(True)
     
-
-
 
 def plot_cm(labels, predictions, plots_path, i, p=0.5):
     cm = confusion_matrix(labels, predictions > p)
@@ -94,29 +92,3 @@ def plot_prc(name, labels, predictions, **kwargs):
     plt.ylabel('Precision')
     plt.grid(True)
     
-
-
-def visualize(history, baseline_results, model, base_dir, IMG_SIZE, BATCH_SIZE,
-              fine_tunning=False, history_fine=None):
-    mpl.rcParams['figure.figsize'] = (24, 20)
-    metrics = ['loss', 'prc', 'precision', 'recall']
-    train_dataset, test_dataset, class_names = load_data_train(base_dir, IMG_SIZE)
-    image_batch_train, train_labels = next(iter(train_dataset))
-    image_batch_test, test_labels = next(iter(test_dataset))
-    train_predictions = model.predict(image_batch_train, batch_size=BATCH_SIZE)
-    test_predictions = model.predict(image_batch_test, batch_size=BATCH_SIZE)
-    for name, value in zip(model.metrics_names, baseline_results):
-        print(name, ': ', value)
-    print()
-
-    plot_cm(test_labels, test_predictions)
-
-    plot_roc("Train", train_labels, train_predictions, color='blue')
-    plot_roc("Test", test_labels, test_predictions, color='blue', linestyle='--')
-    plt.legend(loc='lower right')
-
-    plot_prc("Train", train_labels, train_predictions, color='blue')
-    plot_prc("Test", test_labels, test_predictions, color='blue', linestyle='--')
-    plt.legend(loc='lower right')
-
-    plot_metrics(history, fine_tunning, history_fine)
