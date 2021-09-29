@@ -83,7 +83,7 @@ def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
                 plt.ylim([0, 1])
 
             plt.legend()
-      fig.savefig(f'{plots_path}/Metrics_'+str(i)+'.png')
+    fig.savefig(f'{plots_path}/Metrics_'+str(i)+'.png')
             
 
 
