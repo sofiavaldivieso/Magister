@@ -44,8 +44,8 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
     print('Total: ', np.sum(cm[1]))
 
 
-def plot_metrics(history, fine_tunning=False, history_fine=None):
-    plt.figure(figsize=(15, 15))
+def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
+    fig = plt.figure(figsize=(15, 15))
     metrics = ['loss', 'prc', 'precision', 'recall']
     if fine_tunning:
         for n, metric in enumerate(metrics):
@@ -83,6 +83,7 @@ def plot_metrics(history, fine_tunning=False, history_fine=None):
                 plt.ylim([0, 1])
 
             plt.legend()
+      fig.savefig(f'{plots_path}/Metrics_'+str(i)+'.png')
             
 
 
