@@ -24,11 +24,12 @@ def plot_roc(name, labels, predictions, **kwargs):
     plt.axis([-0.01,1.01,-0.01,1.01]) 
     plt.grid(True)
     
-
 def plot_cm(labels, predictions, plots_path, i, p=0.5):
+    class_names= ['ARE', 'NORMAL']
     cm = confusion_matrix(labels, predictions > p)
+    df = pd.DataFrame(cm, index=class_names, columns=class_names)
     fig = plt.figure(figsize=(10, 10))
-    sns.heatmap(cm, annot=True, fmt="d")
+    sns.heatmap(df, annot=True, fmt="d")
     plt.title('Confusion matrix @{:.2f}'.format(p))
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
@@ -39,7 +40,7 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
     print('False Positives: ', cm[0][1])
     print('False Negatives: ', cm[1][0])
     print('True Positives: ', cm[1][1])
-    print('Total: ', np.sum(cm[1]))
+    print('Total: ', np.sum(cm[1],cm[0]))
 
 
 def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
