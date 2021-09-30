@@ -40,7 +40,6 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
     print('False Positives: ', cm[0][1])
     print('False Negatives: ', cm[1][0])
     print('True Positives: ', cm[1][1])
-    print('Total: ', np.sum(cm[1],cm[0]))
 
 
 def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
