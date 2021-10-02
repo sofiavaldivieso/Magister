@@ -50,11 +50,17 @@ def modelo(IMG_SIZE, model_name, metrics):
     return model, base_model
 
 
-def late_fusion(IMG_SIZE, model_name, metrics, pesos1, pesos2):
+def late_fusion(IMG_SIZE, model_name, metrics, pesos1 = None, pesos2=None):
     model1, base_model1 = modelo(IMG_SIZE, model_name, metrics)
     model2, base_model2 = modelo(IMG_SIZE, model_name, metrics)
-    model1.load_weights(pesos1)
-    model2.load_weights(pesos2)
+    for layer in model2.layers():
+      layer._name = layer.name.split('_')[0]+str('_FUNDUS')
+    for layer in model1.layers():
+      layer._name = layer.name.split('_')[0]+str('_OCT')
+    if pesos1 is not None:
+      model1.load_weights(pesos1)
+    if pesos2 is not None:
+      model2.load_weights(pesos2)
     x1 = model1.layers[-3].output
     x2 = model2.layers[-3].output
     x = tf.keras.layers.Concatenate()([x1, x2])
