@@ -39,3 +39,8 @@ def fine_tunning(modelo, base_dir, total_epoch, history, cp_callback, IMG_SIZE):
 
     return history_fine
 
+def train_fusion(modelo, base_dir, epoch, cp_callback):
+    IMG_SIZE = (496, 1264)
+    history = train(modelo, base_dir, epoch, cp_callback, IMG_SIZE)
+    return history
+
