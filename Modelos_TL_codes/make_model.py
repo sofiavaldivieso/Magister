@@ -7,7 +7,7 @@ def modelo(IMG_SIZE, model_name, metrics):
                                              tf.keras.layers.experimental.preprocessing.RandomRotation(0.2),
                                              ])
     IMG_SHAPE = IMG_SIZE + (3,)
-    if model_name == 'ResNet50':
+    if model_name == 'Resnet':
         preprocess_input = tf.keras.applications.resnet50.preprocess_input
         base_model = tf.keras.applications.ResNet50(include_top=False,
                                                     weights='imagenet',
@@ -19,7 +19,7 @@ def modelo(IMG_SIZE, model_name, metrics):
                                                     weights='imagenet',
                                                     input_tensor=None,
                                                     input_shape=IMG_SHAPE)
-    elif model_name == 'MobileNetV2':
+    elif model_name == 'Mobilenet':
         preprocess_input = tf.keras.applications.mobilenet_v2.preprocess_input
         base_model = tf.keras.applications.MobileNetV2(include_top=False,
                                                        weights='imagenet',
