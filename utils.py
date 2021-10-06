@@ -28,8 +28,8 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
     class_names= ['ARE', 'NORMAL']
     cm = confusion_matrix(labels, predictions > p)
     df = pd.DataFrame(cm, index=class_names, columns=class_names)
-    fig = plt.figure(figsize=(10, 10))
-    sns.heatmap(df, annot=True, fmt="d")
+    fig = plt.figure(figsize=(7, 7))
+    sns.heatmap(df, annot=True, fmt="d", annot_kws={"size": 20})
     plt.title('Confusion matrix @{:.2f}'.format(p))
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
@@ -43,7 +43,7 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
 
 
 def plot_metrics(history, plots_path, i, fine_tunning=False, history_fine=None):
-    fig = plt.figure(figsize=(15, 15))
+    fig = plt.figure(figsize=(10, 10))
     metrics = ['loss', 'prc', 'precision', 'recall']
     if fine_tunning:
         for n, metric in enumerate(metrics):
