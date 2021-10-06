@@ -29,7 +29,7 @@ def plot_cm(labels, predictions, plots_path, i, p=0.5):
     cm = confusion_matrix(labels, predictions > p)
     df = pd.DataFrame(cm, index=class_names, columns=class_names)
     fig = plt.figure(figsize=(7, 7))
-    sns.heatmap(df, annot=True, fmt="d", annot_kws={"size": 20})
+    sns.heatmap(df, annot=True, fmt="d", annot_kws={"size": 14})
     plt.title('Confusion matrix @{:.2f}'.format(p))
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
