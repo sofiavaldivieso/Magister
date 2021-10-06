@@ -31,23 +31,6 @@ def load_data(base_dir, IMG_SIZE):
     return train_dataset, test_dataset, validation_dataset, class_names
 
 
-def make_pairs(OCT_dir, FUNDUS_dir, IMG_SIZE):
-  pairImages = []
-  pairLabels = []
-  train_dataset_OCT, test_dataset_OCT, validation_dataset_OCT, class_names_OCT =load_data_fusion(OCT_dir, IMG_SIZE)
-  train_dataset_FUNDUS, test_dataset_FUNDUS, validation_dataset_FUNDUS, class_names_FUNDUS = load_data_fusion(FUNDUS_dir, IMG_SIZE)
-  image_batch_train_OCT, train_labels_OCT = next(iter(train_dataset_OCT))
-  image_batch_train_FUNDUS, train_labels_FUNDUS = next(iter(train_dataset_FUNDUS))
-  image_batch_test_FUNDUS, test_labels_FUNDUS = next(iter(test_dataset_FUNDUS))
-  image_batch_test_OCT, test_labels_OCT = next(iter(test_dataset_OCT))
-  for i in range(len(image_batch_train_OCT)):
-    img1= image_batch_train_OCT[i]
-    img2= image_batch_train_FUNDUS[i]
-    label= train_labels[i].numpy()
-    if np.array_equal(img1,img2):
-      pairImages.append([img1, img2])
-      pairLabels.append([label])
-    return (np.array(pairImages), np.array(pairLabels))
 def load_data_fusion(base_dir, IMG_SIZE):
     train_dir = os.path.join(base_dir, 'train')
     test_dir = os.path.join(base_dir, 'test')
