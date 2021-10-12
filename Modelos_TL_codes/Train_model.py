@@ -5,7 +5,7 @@ from Modelos_TL_codes.load_data import load_data
 
 
 def train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, seed):
-    train_dataset, test_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE, seed)
+    train_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE, seed)
     print('start training')
     start_time = time.time()
     # Training the model
@@ -23,7 +23,7 @@ def train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, seed):
 
 
 def fine_tunning(modelo, base_dir, total_epoch, history, cp_callback, IMG_SIZE, seed):
-    train_dataset, test_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE, seed)
+    train_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE, seed)
     
     start_time = time.time()
     # Training the model
