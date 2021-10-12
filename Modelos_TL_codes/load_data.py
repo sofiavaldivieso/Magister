@@ -4,7 +4,7 @@ import os
 import numpy as np
 
 
-def load_data(base_dir, IMG_SIZE, seed):
+def load_data(base_dir, IMG_SIZE, seed, metodologia):
     BATCH_SIZE = 16
     train_dataset = image_dataset_from_directory(base_dir,
                                                  shuffle=True,
@@ -24,6 +24,14 @@ def load_data(base_dir, IMG_SIZE, seed):
                                                       label_mode='binary',
                                                       batch_size=BATCH_SIZE,
                                                       image_size=IMG_SIZE)
+    if metodologia=='Metodologia 1' or metodologia=='Metodologia 2':
+      train_dataset2 = image_dataset_from_directory('/content/drive/MyDrive/MAGISTER/DATA/OCT_Kermany',
+                                                 shuffle=True,
+                                                 seed= seed,
+                                                 label_mode='binary',
+                                                 batch_size=16,
+                                                 image_size=IMG_SIZE)
+      train_dataset=train_dataset.concatenate(train_dataset2)
     AUTOTUNE = tf.data.experimental.AUTOTUNE
 
     train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
