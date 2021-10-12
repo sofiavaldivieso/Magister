@@ -6,10 +6,7 @@ import numpy as np
 
 def load_data(base_dir, IMG_SIZE, seed):
     BATCH_SIZE = 16
-    train_dir = os.path.join(base_dir, 'train')
-    test_dir = os.path.join(base_dir, 'test')
-    val_dir = os.path.join(base_dir, 'val')
-    train_dataset = image_dataset_from_directory(train_dir,
+    train_dataset = image_dataset_from_directory(base_dir,
                                                  shuffle=True,
                                                  validation_split=0.3,
                                                  subset="training",
@@ -19,7 +16,7 @@ def load_data(base_dir, IMG_SIZE, seed):
                                                  image_size=IMG_SIZE)
     class_names = train_dataset.class_names
 
-    validation_dataset = image_dataset_from_directory(test_dir,
+    validation_dataset = image_dataset_from_directory(base_dir,
                                                       shuffle=True,
                                                       validation_split=0.3,
                                                       subset="validation",
