@@ -6,14 +6,26 @@ import numpy as np
 
 def load_data(base_dir, IMG_SIZE, seed, metodologia):
     BATCH_SIZE = 16
-    train_dataset = image_dataset_from_directory(base_dir,
+    if metodologia=='Metodologia 1' or metodologia=='Metodologia 2':
+        train_dataset = image_dataset_from_directory(f'{base_dir}/train',
+                                                 shuffle=True,
+                                                 seed= seed,
+                                                 batch_size=BATCH_SIZE,
+                                                 image_size=IMG_SIZE)
+        validation_dataset = image_dataset_from_directory(f'{base_dir}/val',
+                                                  shuffle=True,
+                                                  seed= seed,
+                                                  batch_size=BATCH_SIZE,
+                                                  image_size=IMG_SIZE)
+    
+    else:
+        train_dataset = image_dataset_from_directory(base_dir,
                                                  shuffle=True,
                                                  validation_split=0.3,
                                                  subset="training",
                                                  seed= seed,
                                                  batch_size=BATCH_SIZE,
                                                  image_size=IMG_SIZE)
-    class_names = train_dataset.class_names
 
     validation_dataset = image_dataset_from_directory(base_dir,
                                                       shuffle=True,
@@ -22,15 +34,8 @@ def load_data(base_dir, IMG_SIZE, seed, metodologia):
                                                       seed= seed,
                                                       batch_size=BATCH_SIZE,
                                                       image_size=IMG_SIZE)
-    if metodologia=='Metodologia 1' or metodologia=='Metodologia 2':
-      train_dataset2 = image_dataset_from_directory('/content/drive/MyDrive/MAGISTER/DATA/OCT_Kermany',
-                                                 shuffle=True,
-                                                 seed= seed,
-                                                 batch_size=16,
-                                                 image_size=IMG_SIZE)
-      train_dataset=train_dataset.concatenate(train_dataset2)
-    AUTOTUNE = tf.data.experimental.AUTOTUNE
-
+    
+    class_names = train_dataset.class_names
     train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
     validation_dataset = validation_dataset.prefetch(buffer_size=AUTOTUNE)
     return train_dataset, validation_dataset, class_names
