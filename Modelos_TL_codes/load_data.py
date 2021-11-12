@@ -24,8 +24,7 @@ def load_data(base_dir, IMG_SIZE, seed, metodologia):
                                                  seed= seed,
                                                  batch_size=BATCH_SIZE,
                                                  image_size=IMG_SIZE)
-
-    validation_dataset = image_dataset_from_directory(base_dir,
+        validation_dataset = image_dataset_from_directory(base_dir,
                                                       shuffle=True,
                                                       validation_split=0.3,
                                                       subset="validation",
