@@ -7,11 +7,11 @@ import numpy as np
 def load_data(base_dir, IMG_SIZE, seed, metodologia):
     BATCH_SIZE = 16
     if metodologia=='Metodologia 1' or metodologia=='Metodologia 2':
-        train_dataset = image_dataset_from_directory(os.path.join(base_dir, 'train')),
+        train_dataset = image_dataset_from_directory(os.path.join(base_dir, 'train'),
                                                  shuffle=True,
                                                  batch_size=BATCH_SIZE,
                                                  image_size=IMG_SIZE)
-        validation_dataset = image_dataset_from_directory(os.path.join(base_dir, 'val')),
+        validation_dataset = image_dataset_from_directory(os.path.join(base_dir, 'val'),
                                                   shuffle=True,
                                                   batch_size=BATCH_SIZE,
                                                   image_size=IMG_SIZE)
