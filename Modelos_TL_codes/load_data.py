@@ -35,6 +35,7 @@ def load_data(base_dir, IMG_SIZE, seed, metodologia):
                                                       batch_size=BATCH_SIZE,
                                                       image_size=IMG_SIZE)
     
+    AUTOTUNE = tf.data.experimental.AUTOTUNE
     class_names = train_dataset.class_names
     train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
     validation_dataset = validation_dataset.prefetch(buffer_size=AUTOTUNE)
