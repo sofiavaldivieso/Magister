@@ -22,6 +22,22 @@ def train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, seed, metodologia):
 
     return history
 
+def final_train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, seed, metodologia):
+    train_dataset, class_names = final_load_data(base_dir, IMG_SIZE, metodologia) 
+    print('start training')
+    start_time = time.time()
+    # Training the model
+    
+    history = modelo.fit(train_dataset,
+                         epochs=epoch,
+                         callbacks=[cp_callback])
+
+    end_time = time.time()
+    print("--- Time taken to train : %s hours ---" % ((end_time - start_time) // 3600))
+    # Freeze all the layers before the `fine_tune_at` layer
+
+    return history
+
 
 def fine_tunning(modelo, base_dir, total_epoch, history, cp_callback, IMG_SIZE, seed):
     train_dataset, validation_dataset, class_names = load_data(base_dir, IMG_SIZE, seed)
