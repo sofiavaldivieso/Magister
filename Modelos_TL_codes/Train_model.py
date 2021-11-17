@@ -57,8 +57,8 @@ def fine_tunning(modelo, base_dir, total_epoch, history, cp_callback, IMG_SIZE, 
 
     return history_fine
 
-def train_fusion(modelo, base_dir, epoch, cp_callback, seed):
+def train_fusion(modelo, base_dir, epoch, cp_callback, seed, metodologia):
     IMG_SIZE = (248, 632)
-    history = train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, seed)
+    history = train(modelo, base_dir, epoch, cp_callback, IMG_SIZE, seed, metodologia)
     return history
 
